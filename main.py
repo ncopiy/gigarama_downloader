@@ -53,6 +53,12 @@ def merge_photos(panorama_id):
     result.save(os.path.join(RESULT_FOLDER, f'{panorama_id}.jpg'))
 
 
+def delete_pieces(panorama_id):
+    for file_name in os.listdir(panorama_id):
+        os.remove(os.path.join(panorama_id, file_name))
+    os.rmdir(panorama_id)
+
+
 if __name__ == "__main__":
     for p_id in PANORAMAS_IDS:
         print(f"downloading {p_id}")
@@ -67,4 +73,4 @@ if __name__ == "__main__":
 
     if DO_PIECES_DELETION_AFTER_SCRIPT_END:
         for p_id in PANORAMAS_IDS:
-            os.remove(p_id)
+            delete_pieces(p_id)
